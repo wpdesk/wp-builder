@@ -10,7 +10,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  */
 abstract class AbstractPlugin {
 
-	/** @var \WPDesk_PluginInfo */
+	/** @var \WPDesk_Plugin_Info */
     protected $plugin_info;
 
     /** @var string */
@@ -32,7 +32,7 @@ abstract class AbstractPlugin {
 	 */
     public function __construct( $plugin_info ) {
 		$this->plugin_info = $plugin_info;
-		$this->plugin_namespace = strtolower($plugin_info->get_class_name()); // ?? NOT SURE
+		$this->plugin_namespace = strtolower($plugin_info->get_plugin_dir());
     }
 
     public function init() {
@@ -59,7 +59,7 @@ abstract class AbstractPlugin {
      * @return void
      */
     public function load_plugin_text_domain() {
-        $plugin_translation = load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
+        load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
     }
 
     public function init_base_variables( ) {
