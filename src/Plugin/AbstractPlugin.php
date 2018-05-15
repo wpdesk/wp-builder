@@ -59,9 +59,6 @@ error_log('init');
      * @return void
      */
     public function load_plugin_text_domain() {
-error_log('load');
-error_log($this->get_text_domain());
-error_log($this->get_namespace());
         load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
     }
 
@@ -77,7 +74,7 @@ error_log($this->get_namespace());
 
         add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
 
-        add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ), 100 );
+        add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
         add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_file_path() ), array(
             $this,
             'links_filter'
