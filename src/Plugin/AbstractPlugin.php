@@ -60,6 +60,8 @@ error_log('init');
      */
     public function load_plugin_text_domain() {
 error_log('load');
+error_log($this->get_text_domain());
+error_log($this->get_namespace());
         load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
     }
 
