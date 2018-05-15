@@ -38,6 +38,7 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
     public function init() {
     	$this->init_base_variables();
     	$this->hooks();
+error_log('init');
     }
 
     /**
@@ -58,6 +59,7 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
      * @return void
      */
     public function load_plugin_text_domain() {
+error_log('load');
         load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
     }
 
@@ -73,7 +75,7 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 
         add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
 
-        add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
+        add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ), 100 );
         add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_file_path() ), array(
             $this,
             'links_filter'
