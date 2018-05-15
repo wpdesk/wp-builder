@@ -38,7 +38,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
     public function init() {
     	$this->init_base_variables();
     	$this->hooks();
-error_log('init');
     }
 
     /**
