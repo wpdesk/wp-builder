@@ -17,7 +17,7 @@ class InfoBuilder extends AbstractBuilder {
 	 *
 	 * @return AbstractPlugin
 	 */
-	public function build_from_info( \WPDesk_Plugin_Info $info ) {
+	public function build_from_info( \WPDesk_Buildable $info ) {
 		$class_name = apply_filters( self::FILTER_PLUGIN_CLASS, $info->get_class_name() );
 
 		/** @var AbstractPlugin $plugin */

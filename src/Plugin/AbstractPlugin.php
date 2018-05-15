@@ -8,7 +8,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  * @author Grzegorz
  *
  */
-abstract class AbstractPlugin {
+abstract class AbstractPlugin implements \WPDesk_Translable {
 
 	/** @var \WPDesk_Plugin_Info */
     protected $plugin_info;
@@ -37,7 +37,6 @@ abstract class AbstractPlugin {
 
     public function init() {
     	$this->init_base_variables();
-    	$this->load_plugin_text_domain();
     	$this->hooks();
     }
 
@@ -52,7 +51,7 @@ abstract class AbstractPlugin {
      * @return string
      */
     public function get_text_domain() {
-        return $this->get_namespace();
+        return $this->plugin_info->get_text_domain();
     }
 
     /**
@@ -127,20 +126,20 @@ abstract class AbstractPlugin {
         $support_link = get_locale() === 'pl_PL' ? 'https://www.wpdesk.pl/support/' : 'https://www.wpdesk.net/support';
 
         $plugin_links = array(
-            '<a href="' . $support_link . '">' . __( 'Support', 'wpdesk-plugin' ) . '</a>',
+            '<a href="' . $support_link . '">' . __( 'Support', $this->get_text_domain() ) . '</a>',
         );
         $links        = array_merge( $plugin_links, $links );
 
         if ( $this->docs_url ) {
             $plugin_links = array(
-                '<a href="' . $this->docs_url . '">' . __( 'Docs', 'wpdesk-plugin' ) . '</a>',
+                '<a href="' . $this->docs_url . '">' . __( 'Docs', $this->get_text_domain() ) . '</a>',
             );
             $links        = array_merge( $plugin_links, $links );
         }
 
         if ( $this->settings_url ) {
             $plugin_links = array(
-                '<a href="' . $this->settings_url . '">' . __( 'Settings', 'wpdesk-plugin' ) . '</a>',
+                '<a href="' . $this->settings_url . '">' . __( 'Settings', $this->get_text_domain() ) . '</a>',
             );
             $links        = array_merge( $plugin_links, $links );
         }
