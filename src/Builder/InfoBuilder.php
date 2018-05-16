@@ -3,40 +3,55 @@
 namespace WPDesk\PluginBuilder\Builder;
 
 use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
+use WPDesk\PluginBuilder\Plugin\PluginStorage;
 
 class InfoBuilder extends AbstractBuilder {
 	const FILTER_PLUGIN_CLASS = 'wp_builder_plugin_class';
 	const HOOK_BEFORE_PLUGIN_INIT = 'wp_builder_before_plugin_init';
 	const HOOK_AFTER_PLUGIN_INIT = 'wp_builder_before_init';
 
-	/**
-	 * Builds instance of plugin
-	 *
-	 * @param \WPDesk_Plugin_Info $info
-	 * @return AbstractPlugin
-	 *
-	 * @return AbstractPlugin
-	 */
-	public function build_from_info( \WPDesk_Buildable $info ) {
-		$class_name = apply_filters( self::FILTER_PLUGIN_CLASS, $info->get_class_name() );
+	/** @var AbstractPlugin */
+	private $plugin;
 
-		/** @var AbstractPlugin $plugin */
-		$plugin = new $class_name( $info );
-		$this->addToStorage( $info->get_class_name(), $plugin );
+	/** @var \WPDesk_Buildable */
+	private $info;
 
-		do_action( self::HOOK_BEFORE_PLUGIN_INIT, $plugin );
-		$plugin->init();
-		do_action( self::HOOK_AFTER_PLUGIN_INIT, $plugin );
+	/** @var PluginStorage */
+	private $storage;
 
-		return $plugin;
+	/** @var string  */
+	protected $storage_id;
+
+	public function __construct( \WPDesk_Buildable $info, PluginStorage $storage ) {
+		$this->info = $info;
+		$this->storage = $storage;
+		$this->storage_id = $info->get_class_name();
 	}
 
 	/**
-	 * @param string $class
-	 *
+	 * Builds instance of plugin
+	 */
+	public function build_plugin() {
+		$class_name = apply_filters( self::FILTER_PLUGIN_CLASS, $this->info->get_class_name() );
+
+		/** @var AbstractPlugin $plugin */
+		$this->plugin = new $class_name( $this->info );
+	}
+
+	public function store_plugin() {
+		$this->storage->add_to_storage( $this->storage_id, $this->plugin );
+	}
+
+	public function init_plugin() {
+		do_action( self::HOOK_BEFORE_PLUGIN_INIT, $this->plugin );
+		$this->plugin->init();
+		do_action( self::HOOK_AFTER_PLUGIN_INIT, $this->plugin );
+	}
+
+	/**
 	 * @return AbstractPlugin
 	 */
-	public function get_plugin_instance( $class ) {
-		return $this->getFromStorage( $class );
+	public function get_plugin() {
+		return $this->plugin;
 	}
 }
