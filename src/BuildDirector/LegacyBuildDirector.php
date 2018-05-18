@@ -18,7 +18,7 @@ class LegacyBuildDirector {
 	/**
 	 * Builds plugin
 	 */
-	public function buildPlugin() {
+	public function build_plugin() {
 		$this->builder->build_plugin();
 		$this->builder->init_plugin();
 
@@ -31,7 +31,7 @@ class LegacyBuildDirector {
 	 *
 	 * @return AbstractPlugin
 	 */
-	public function getPlugin() {
+	public function get_plugin() {
 		return $this->builder->get_plugin();
 	}
 }
