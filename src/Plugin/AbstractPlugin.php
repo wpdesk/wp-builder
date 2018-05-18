@@ -40,27 +40,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 		$this->hooks();
 	}
 
-	/**
-	 * @return $this
-	 */
-	public function get_plugin() {
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_text_domain() {
-		return $this->plugin_info->get_text_domain();
-	}
-
-	/**
-	 * @return void
-	 */
-	public function load_plugin_text_domain() {
-		load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
-	}
-
 	public function init_base_variables() {
 		$this->plugin_url = plugin_dir_url( $this->plugin_info->get_plugin_dir() );
 	}
@@ -82,18 +61,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 	}
 
 	/**
-	 *
-	 * @return string
-	 */
-	public function get_plugin_url() {
-		return esc_url( trailingslashit( $this->plugin_url ) );
-	}
-
-	public function get_plugin_assets_url() {
-		return esc_url( trailingslashit( $this->get_plugin_url() . 'assets' ) );
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_plugin_file_path() {
@@ -101,10 +68,43 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 	}
 
 	/**
+	 * @return $this
+	 */
+	public function get_plugin() {
+		return $this;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function load_plugin_text_domain() {
+		load_plugin_textdomain( $this->get_text_domain(), false, $this->get_namespace() . '/lang/' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_text_domain() {
+		return $this->plugin_info->get_text_domain();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_namespace() {
 		return $this->plugin_namespace;
+	}
+
+	public function get_plugin_assets_url() {
+		return esc_url( trailingslashit( $this->get_plugin_url() . 'assets' ) );
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function get_plugin_url() {
+		return esc_url( trailingslashit( $this->plugin_url ) );
 	}
 
 	public function admin_enqueue_scripts() {
