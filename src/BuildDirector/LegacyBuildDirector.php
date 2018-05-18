@@ -6,6 +6,7 @@ use WPDesk\PluginBuilder\Builder\AbstractBuilder;
 use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
 
 class LegacyBuildDirector {
+
 	/** @var AbstractBuilder */
 	private $builder;
 
@@ -13,6 +14,9 @@ class LegacyBuildDirector {
 		$this->builder = $builder;
 	}
 
+	/**
+	 * Builds plugin
+	 */
 	public function buildPlugin() {
 		$this->builder->build_plugin();
 		$this->builder->init_plugin();
@@ -20,6 +24,8 @@ class LegacyBuildDirector {
 	}
 
 	/**
+	 * Returns built plugin
+	 *
 	 * @return AbstractPlugin
 	 */
 	public function getPlugin() {
