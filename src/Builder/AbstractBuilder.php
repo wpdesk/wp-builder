@@ -2,7 +2,9 @@
 
 namespace WPDesk\PluginBuilder\Builder;
 
-class AbstractBuilder {
+use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
+
+abstract class AbstractBuilder {
 	/**
 	 * Create plugin class
 	 */
@@ -23,9 +25,9 @@ class AbstractBuilder {
 
 	/**
 	 * Return built plugin
+	 * @return AbstractPlugin
 	 */
-	public function get_plugin() {
-	}
+	abstract function get_plugin();
 
 	/**
 	 * Set settings class in plugin
