@@ -3,7 +3,7 @@
 namespace WPDesk\PluginBuilder\Builder;
 
 class AbstractBuilder {
-	public function build() {
+	public function build_plugin() {
 	}
 
 	public function store_plugin() {
