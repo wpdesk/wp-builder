@@ -3,31 +3,62 @@
 namespace WPDesk\PluginBuilder\Builder;
 
 use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
+use WPDesk\PluginBuilder\Storage\PluginStorage;
 
-class AbstractBuilder {
-	protected static $instances = [];
-
+abstract class AbstractBuilder {
 	/**
-	 * @param string $class
-	 * @param AbstractPlugin $object
+	 * Create plugin class
 	 */
-	protected function addToStorage( $class, $object ) {
-		if ( isset( self::$instances[ $class ] ) ) {
-			throw new Exception\ClassAlreadyExists( "Class {$class} already exists" );
-		}
-		self::$instances[ $class ] = $object;
+	public function build_plugin() {
 	}
 
 	/**
-	 * @param string $class
-	 *
+	 * Store plugin class in some kind of storage
+	 */
+	public function store_plugin( PluginStorage $storage ) {
+	}
+
+	/**
+	 * Init plugin internal structure
+	 */
+	public function init_plugin() {
+	}
+
+	/**
+	 * Return built plugin
 	 * @return AbstractPlugin
 	 */
-	protected function getFromStorage( $class ) {
-		if ( isset( self::$instances[ $class ] ) ) {
-			return self::$instances[ $class ];
-		} else {
-			throw new Exception\ClassNotExists( "Class {$class} not exists in storage" );
-		}
+	abstract function get_plugin();
+
+	/**
+	 * Set settings class in plugin
+	 *
+	 * @param $settings
+	 */
+	public function set_settings( $settings ) {
+	}
+
+	/**
+	 * Set view class in plugin
+	 *
+	 * @param $view
+	 */
+	public function set_view( $view ) {
+	}
+
+	/**
+	 * Set tracker class in plugin
+	 *
+	 * @param $tracker
+	 */
+	public function set_tracker( $tracker ) {
+	}
+
+	/**
+	 * Set helper class in plugin
+	 *
+	 * @param $helper
+	 */
+	public function set_helper( $helper ) {
 	}
 }

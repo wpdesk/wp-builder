@@ -1,6 +1,6 @@
 <?php
 
-namespace WPDesk\PluginBuilder\Builder\Exception;
+namespace WPDesk\PluginBuilder\Storage\Exception;
 
 class ClassAlreadyExists extends \RuntimeException
 {
