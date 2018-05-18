@@ -3,6 +3,7 @@
 namespace WPDesk\PluginBuilder\Builder;
 
 use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
+use WPDesk\PluginBuilder\Storage\PluginStorage;
 
 abstract class AbstractBuilder {
 	/**
@@ -14,7 +15,7 @@ abstract class AbstractBuilder {
 	/**
 	 * Store plugin class in some kind of storage
 	 */
-	public function store_plugin() {
+	public function store_plugin( PluginStorage $storage ) {
 	}
 
 	/**
@@ -34,7 +35,7 @@ abstract class AbstractBuilder {
 	 *
 	 * @param $settings
 	 */
-	public function set_settings($settings) {
+	public function set_settings( $settings ) {
 	}
 
 	/**
@@ -42,7 +43,7 @@ abstract class AbstractBuilder {
 	 *
 	 * @param $view
 	 */
-	public function set_view($view) {
+	public function set_view( $view ) {
 	}
 
 	/**
@@ -50,7 +51,7 @@ abstract class AbstractBuilder {
 	 *
 	 * @param $tracker
 	 */
-	public function set_tracker($tracker) {
+	public function set_tracker( $tracker ) {
 	}
 
 	/**
@@ -58,6 +59,6 @@ abstract class AbstractBuilder {
 	 *
 	 * @param $helper
 	 */
-	public function set_helper($helper) {
+	public function set_helper( $helper ) {
 	}
 }

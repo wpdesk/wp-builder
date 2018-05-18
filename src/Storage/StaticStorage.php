@@ -1,8 +1,10 @@
 <?php
 
-namespace WPDesk\PluginBuilder\Plugin;
+namespace WPDesk\PluginBuilder\Storage;
 
-class PluginStorage {
+use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
+
+class StaticStorage implements PluginStorage {
 	protected static $instances = [];
 
 	/**

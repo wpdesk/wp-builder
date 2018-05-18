@@ -3,7 +3,7 @@
 namespace WPDesk\PluginBuilder\Builder;
 
 use WPDesk\PluginBuilder\Plugin\AbstractPlugin;
-use WPDesk\PluginBuilder\Plugin\PluginStorage;
+use WPDesk\PluginBuilder\Storage\PluginStorage;
 
 class InfoBuilder extends AbstractBuilder {
 	const FILTER_PLUGIN_CLASS = 'wp_builder_plugin_class';
@@ -16,15 +16,11 @@ class InfoBuilder extends AbstractBuilder {
 	/** @var \WPDesk_Buildable */
 	private $info;
 
-	/** @var PluginStorage */
-	private $storage;
-
-	/** @var string  */
+	/** @var string */
 	protected $storage_id;
 
-	public function __construct( \WPDesk_Buildable $info, PluginStorage $storage ) {
-		$this->info = $info;
-		$this->storage = $storage;
+	public function __construct( \WPDesk_Buildable $info ) {
+		$this->info       = $info;
 		$this->storage_id = $info->get_class_name();
 	}
 
@@ -38,8 +34,8 @@ class InfoBuilder extends AbstractBuilder {
 		$this->plugin = new $class_name( $this->info );
 	}
 
-	public function store_plugin() {
-		$this->storage->add_to_storage( $this->storage_id, $this->plugin );
+	public function store_plugin( PluginStorage $storage ) {
+		$storage->add_to_storage( $this->storage_id, $this->plugin );
 	}
 
 	public function init_plugin() {
