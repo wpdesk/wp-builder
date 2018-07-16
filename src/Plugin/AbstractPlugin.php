@@ -64,7 +64,7 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 	 * @return string
 	 */
 	public function get_plugin_file_path() {
-		return $this->plugin_info->get_plugin_dir();
+		return $this->plugin_info->get_plugin_file_name();
 	}
 
 	/**
