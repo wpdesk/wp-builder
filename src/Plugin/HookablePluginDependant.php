@@ -11,7 +11,7 @@ interface HookablePluginDependant extends Hookable {
 	 *
 	 * @return null
 	 */
-	public function set_plugin( $plugin );
+	public function set_plugin( AbstractPlugin $plugin );
 
 	/**
 	 * Get plugin.
