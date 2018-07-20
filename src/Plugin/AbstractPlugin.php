@@ -8,7 +8,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  * @author Grzegorz
  *
  */
-abstract class AbstractPlugin implements \WPDesk_Translable, Hookable {
+abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection, Hookable {
 
 	/** @var \WPDesk_Plugin_Info */
 	protected $plugin_info;
@@ -53,21 +53,14 @@ abstract class AbstractPlugin implements \WPDesk_Translable, Hookable {
 
 	/**
 	 * Add hookable object.
+	 *
+	 * @param Hookable|HookablePluginDependant $hookable_object Hookable object.
 	 */
 	public function add_hookable( $hookable_object ) {
-		$hookable_object->set_plugin( $this );
+		if ( $hookable_object instanceof HookablePluginDependant ) {
+			$hookable_object->set_plugin( $this );
+		}
 		$this->hookable_objects[] = $hookable_object;
-	}
-
-	/**
-	 * Set plugin - currently do nothing.
-	 *
-	 * @param AbstractPlugin $plugin Plugin.
-	 *
-	 * @return null
-	 */
-	public function set_plugin( $plugin ) {
-		return;
 	}
 
 	/**
