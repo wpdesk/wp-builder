@@ -8,7 +8,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  * @author Grzegorz
  *
  */
-abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection, Hookable {
+abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection {
 
 	/** @var \WPDesk_Plugin_Info */
 	protected $plugin_info;
