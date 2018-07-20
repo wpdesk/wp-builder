@@ -40,6 +40,9 @@ abstract class AbstractPlugin implements \WPDesk_Translable, Hookable {
 		$this->plugin_namespace = strtolower( $plugin_info->get_plugin_dir() );
 	}
 
+	/**
+	 * Init.
+	 */
 	public function init() {
 		$this->init_base_variables();
 	}
