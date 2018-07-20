@@ -26,7 +26,7 @@ abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection 
 	protected $settings_url;
 
 	/**
-	 * @var array
+	 * @var array[Hookable]
 	 */
 	private $hookable_objects = array();
 
