@@ -10,7 +10,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  * * This class is loaded at startup from first loaded plugin! *
  * *************************************************************
  *
- * @author Grzegorz, Dysczo
+ * @author Grzegorz, Dyszczo
  *
  */
 abstract class AbstractPlugin implements \WPDesk_Translable {
