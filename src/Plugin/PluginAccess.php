@@ -15,7 +15,7 @@ trait PluginAccess {
 	 *
 	 * @param AbstractPlugin $plugin Plugin.
 	 */
-	public function set_plugin( $plugin ) {
+	public function set_plugin( AbstractPlugin $plugin ) {
 		$this->plugin = $plugin;
 	}
 
