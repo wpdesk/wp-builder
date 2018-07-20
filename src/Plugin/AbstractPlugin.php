@@ -3,12 +3,17 @@
 namespace WPDesk\PluginBuilder\Plugin;
 
 /**
- * Base plugin class for WP Desk plugins
+ * Base plugin class for WP Desk plugins.
  *
- * @author Grzegorz
+ * *************************************************************
+ * * Important! This class should be not modified!             *
+ * * This class is loaded at startup from first loaded plugin! *
+ * *************************************************************
+ *
+ * @author Grzegorz, Dysczo
  *
  */
-abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection {
+abstract class AbstractPlugin implements \WPDesk_Translable {
 
 	/** @var \WPDesk_Plugin_Info */
 	protected $plugin_info;
@@ -26,11 +31,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection 
 	protected $settings_url;
 
 	/**
-	 * @var array[Hookable]
-	 */
-	private $hookable_objects = array();
-
-	/**
 	 * AbstractPlugin constructor.
 	 *
 	 * @param \WPDesk_Plugin_Info $plugin_info
@@ -40,11 +40,9 @@ abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection 
 		$this->plugin_namespace = strtolower( $plugin_info->get_plugin_dir() );
 	}
 
-	/**
-	 * Init.
-	 */
 	public function init() {
 		$this->init_base_variables();
+		$this->hooks();
 	}
 
 	public function init_base_variables() {
@@ -52,21 +50,9 @@ abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection 
 	}
 
 	/**
-	 * Add hookable object.
-	 *
-	 * @param Hookable|HookablePluginDependant $hookable_object Hookable object.
-	 */
-	public function add_hookable( $hookable_object ) {
-		if ( $hookable_object instanceof HookablePluginDependant ) {
-			$hookable_object->set_plugin( $this );
-		}
-		$this->hookable_objects[] = $hookable_object;
-	}
-
-	/**
 	 * @return void
 	 */
-	public function hooks() {
+	protected function hooks() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
@@ -76,10 +62,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable, HookableCollection 
 			$this,
 			'links_filter'
 		] );
-		/** @var Hookable $hookable_object */
-		foreach ( $this->hookable_objects as $hookable_object ) {
-			$hookable_object->hooks();
-		}
 
 	}
 
