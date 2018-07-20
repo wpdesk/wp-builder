@@ -8,7 +8,7 @@ namespace WPDesk\PluginBuilder\Plugin;
  * @author Grzegorz
  *
  */
-abstract class AbstractPlugin implements \WPDesk_Translable {
+abstract class AbstractPlugin implements \WPDesk_Translable, Hookable {
 
 	/** @var \WPDesk_Plugin_Info */
 	protected $plugin_info;
@@ -26,6 +26,11 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 	protected $settings_url;
 
 	/**
+	 * @var array
+	 */
+	private $hookable_objects = array();
+
+	/**
 	 * AbstractPlugin constructor.
 	 *
 	 * @param \WPDesk_Plugin_Info $plugin_info
@@ -37,7 +42,6 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 
 	public function init() {
 		$this->init_base_variables();
-		$this->hooks();
 	}
 
 	public function init_base_variables() {
@@ -45,9 +49,28 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 	}
 
 	/**
+	 * Add hookable object.
+	 */
+	public function add_hookable( $hookable_object ) {
+		$hookable_object->set_plugin( $this );
+		$this->hookable_objects[] = $hookable_object;
+	}
+
+	/**
+	 * Set plugin - currently do nothing.
+	 *
+	 * @param AbstractPlugin $plugin Plugin.
+	 *
+	 * @return null
+	 */
+	public function set_plugin( $plugin ) {
+		return;
+	}
+
+	/**
 	 * @return void
 	 */
-	protected function hooks() {
+	public function hooks() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
@@ -57,6 +80,10 @@ abstract class AbstractPlugin implements \WPDesk_Translable {
 			$this,
 			'links_filter'
 		] );
+		/** @var Hookable $hookable_object */
+		foreach ( $this->hookable_objects as $hookable_object ) {
+			$hookable_object->hooks();
+		}
 
 	}
 
