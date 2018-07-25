@@ -27,7 +27,7 @@ class LegacyBuildDirector {
 	}
 
 	/**
-	 * Returns built plugin
+	 * Returns built pluginPluginAccess.php
 	 *
 	 * @return AbstractPlugin
 	 */
