@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: grola
- * Date: 25.07.18
- * Time: 16:55
- */
 
 namespace WPDesk\PluginBuilder\Plugin;
 

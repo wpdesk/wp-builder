@@ -16,7 +16,7 @@ trait HookableParent {
 	 *
 	 * @param Hookable|HookablePluginDependant $hookable_object Hookable object.
 	 */
-	public function add_hookable( $hookable_object ) {
+	public function add_hookable( Hookable $hookable_object ) {
 		if ( $hookable_object instanceof HookablePluginDependant ) {
 			$hookable_object->set_plugin( $this );
 		}
@@ -26,7 +26,7 @@ trait HookableParent {
 	/**
 	 * Run hooks method on all hookable objects.
 	 */
-	protected function hooks_no_hookable_objects() {
+	protected function hooks_on_hookable_objects() {
 		/** @var Hookable $hookable_object $hookable_object */
 		foreach ( $this->hookable_objects as $hookable_object ) {
 			$hookable_object->hooks();

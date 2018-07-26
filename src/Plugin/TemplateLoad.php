@@ -2,21 +2,21 @@
 
 namespace WPDesk\PluginBuilder\Plugin;
 
-trait Template {
+trait TemplateLoad {
 
 	/**
 	 * Plugin path.
 	 *
 	 * @var string
 	 */
-	public $plugin_path;
+	protected $plugin_path;
 
 	/**
 	 * Template path.
 	 *
 	 * @var string
 	 */
-	public $template_path;
+	protected $template_path;
 
 	/**
 	 * Init base variables for plugin
