@@ -7,9 +7,9 @@ interface HookableCollection extends Hookable {
 	/**
 	 * Add hookable object.
 	 *
-	 * @param Hookable $hookable_object Hookable object to add.
+	 * @param Hookable|HookablePluginDependant $hookable_object Hookable object.
 	 */
-	public function add_hookable( $hookable_object );
+	public function add_hookable( Hookable $hookable_object );
 
 }
 
