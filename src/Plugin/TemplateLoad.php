@@ -57,6 +57,8 @@ trait TemplateLoad {
 	}
 
 	/**
+	 * Get template path.
+	 *
 	 * @return string
 	 */
 	public function get_template_path() {
