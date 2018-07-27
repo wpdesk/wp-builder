@@ -56,6 +56,14 @@ trait TemplateLoad {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Get template path.
+	 *
+	 * @return string
+	 */
+	public function get_template_path() {
+		return trailingslashit( $this->template_path );
+	}
 
 
 }
