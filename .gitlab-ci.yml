@@ -193,7 +193,7 @@ acceptance test:
     name: "error logs"
     paths:
       - ${CI_PROJECT_DIR}/acceptance
-  stage: acceptance_tests
+  stage: tests
   allow_failure: true
   script:
     - cd ${CI_PROJECT_DIR}
