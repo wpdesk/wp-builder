@@ -24,6 +24,22 @@ trait HookableParent {
 	}
 
 	/**
+	 * Get hookable instance.
+	 *
+	 * @param string $class_name Class name.
+	 *
+	 * @return false|Hookable
+	 */
+	public function get_hookable_instance_by_class_name( $class_name ) {
+		foreach ( $this->hookable_objects as $hookable_object ) {
+			if ( $hookable_object instanceof $class_name ) {
+				return $hookable_object;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Run hooks method on all hookable objects.
 	 */
 	protected function hooks_on_hookable_objects() {
